@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "e9cc3c22-28ff-4acd-88ec-f0d6f9182140",
+		"name": "Test_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19471617",
+		"_collection_link": "https://speeding-trinity-149816.postman.co/workspace/Homework_postman~d31d54a6-635c-42f6-83bb-f021e5c5a127/collection/19471617-e9cc3c22-28ff-4acd-88ec-f0d6f9182140?action=share&creator=19471617&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create_new_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"let responseData = JSON.parse(responseBody);\r",
+							"pm.test(\"Expect response message is equal ok\", function () {\r",
+							"    pm.expect(responseData.message).to.eql(\"ok\");})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/createWithArray",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"createWithArray"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_user_info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"let responseData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"username\", responseData.username);\r",
+							"pm.environment.set(\"password\", responseData.password);\r",
+							"pm.environment.set(\"user_id\", responseData.id);\r",
+							"console.log(responseData);\r",
+							"pm.test(\"Expect response message is equal ok\", function () {\r",
+							"    pm.expect(responseData.username).to.eql(\"1233405010\");})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/1233405010",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"1233405010"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login_with_created_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/login?username={{username}}&password={{password}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{username}}"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change_user_info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": {{user_id}},\r\n    \"username\": \"{{username}}\",\r\n    \"firstName\": \"{{user_new_name}}\",\r\n    \"lastName\": \"{{user_new_lastname}}\",\r\n    \"email\": \"{{user_new_email}}\",\r\n    \"password\": \"12345\",\r\n    \"phone\": \"123123123\",\r\n    \"userStatus\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/{{username}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"{{username}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_new_user_info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"let responseData = JSON.parse(responseBody);\r",
+							"pm.test(\"Expect response message is equal ok\", function () {\r",
+							"    pm.expect(responseData.firstname).to.eql(\"%anton\");})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/{{username}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"{{username}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
