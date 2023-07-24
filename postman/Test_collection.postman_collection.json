@@ -19,7 +19,14 @@
 							"});\r",
 							"let responseData = JSON.parse(responseBody);\r",
 							"pm.test(\"Expect response message is equal ok\", function () {\r",
-							"    pm.expect(responseData.message).to.eql(\"ok\");})"
+							"    pm.expect(responseData.message).to.eql(\"ok\");});\r",
+							"var reqBody = JSON.parse(request.data);\r",
+							"pm.environment.set(\"username\", reqBody[0].username);\r",
+							"pm.environment.set(\"password\", reqBody[0].password);\r",
+							"pm.environment.set(\"email\", reqBody[0].email);\r",
+							"pm.environment.set(\"phone\", reqBody[0].phone);\r",
+							"console.log(reqBody[0].firstname);\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -32,8 +39,13 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "file",
-					"file": {}
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"ivanivan\",\r\n    \"firstName\": \"asdasd\",\r\n    \"lastName\": \"asfaf\",\r\n    \"email\": \"afaf\",\r\n    \"password\": \"afasdfasdf\",\r\n    \"phone\": \"asdfadfaf\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "https://petstore.swagger.io/v2/user/createWithArray",
@@ -63,8 +75,6 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"let responseData = JSON.parse(responseBody);\r",
-							"pm.environment.set(\"username\", responseData.username);\r",
-							"pm.environment.set(\"password\", responseData.password);\r",
 							"pm.environment.set(\"user_id\", responseData.id);\r",
 							"console.log(responseData);\r",
 							"pm.test(\"Expect response message is equal ok\", function () {\r",
@@ -81,7 +91,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://petstore.swagger.io/v2/user/1233405010",
+					"raw": "https://petstore.swagger.io/v2/user/{{username}}",
 					"protocol": "https",
 					"host": [
 						"petstore",
@@ -91,7 +101,7 @@
 					"path": [
 						"v2",
 						"user",
-						"1233405010"
+						"{{username}}"
 					]
 				}
 			},
@@ -168,7 +178,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"id\": {{user_id}},\r\n    \"username\": \"{{username}}\",\r\n    \"firstName\": \"{{user_new_name}}\",\r\n    \"lastName\": \"{{user_new_lastname}}\",\r\n    \"email\": \"{{user_new_email}}\",\r\n    \"password\": \"12345\",\r\n    \"phone\": \"123123123\",\r\n    \"userStatus\": 0\r\n}\r\n",
+					"raw": "{\r\n  \"id\": {{user_id}},\r\n    \"username\": \"{{username}}\",\r\n    \"firstName\": \"{{user_new_name}}\",\r\n    \"lastName\": \"{{user_new_lastname}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"userStatus\": 0\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
