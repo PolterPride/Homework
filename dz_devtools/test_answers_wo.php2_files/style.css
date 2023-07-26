@@ -1,0 +1,55 @@
+﻿body {
+    font-size: 40px;
+	text-align: center;
+}
+button {
+    font-size: 32px;
+    text-align: center;
+}
+input{
+	font-size: 32px;
+    text-align: center;
+}
+
+input[type="radio"]  {
+	opacity: 0;
+	width:30px;
+	height: 30px
+}
+input[type="radio"] + span {
+display:inline-block;
+position:relative;
+  width: 30px;
+  margin-left: -30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+input[type="radio"]:checked + span:after {
+content: "";
+position: absolute;
+left:50%;
+top:50%;
+ width: 10px;
+  margin: -5px 0 0 -5px;
+  height: 10px;
+  border-radius: 50%;
+  background: red;
+}
+
+input[type="radio"]:focus + span {
+box-shadow: 0 0 2px red
+
+}
+
+
+
+.list-wrapper {
+text-align: center
+}  
+
+.list-wrapper  ul {
+display:inline-block;
+text-align: left;
+}
